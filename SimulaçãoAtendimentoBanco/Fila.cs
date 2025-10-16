@@ -28,7 +28,6 @@ public class Fila : Banco
         {
             Tail.Proximo = cliente;
             Tail = cliente;
-            Tail.Proximo = null;
         }
 
         return this;
@@ -39,17 +38,19 @@ public class Fila : Banco
         if (Vazia())
         {
             Console.WriteLine("Fila Vazia!");
+            return Head;
         }
         else
         {
+            var aux = Head;
             Head = Head.Proximo;
             if (Head == null)
             {
                 Tail = Head;
             }
-
+            return aux;
         }
-        return Head;
+       
     }
 
 
@@ -64,7 +65,7 @@ public class Fila : Banco
             var aux = Head;
             while(aux != null)
             {
-                Console.WriteLine($"Nome: {aux.Nome}\nIdade: {aux.Idade}\n");
+                Console.WriteLine(aux);
                 aux = aux.Proximo;
             }
         }

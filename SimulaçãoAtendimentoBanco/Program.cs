@@ -1,6 +1,5 @@
 ﻿using SimulaçãoAtendimentoBanco;
 
-
 var filaNormal = new Fila();
 var filaPrioritaria = new Fila();
 var banco = new Banco();
@@ -25,27 +24,25 @@ do
 
             Console.Write("Idade do cliente: ");
             var idade = int.Parse(Console.ReadLine() ?? "");
-
-            if (idade >= 65)
+            var cliente = new Cliente(nome, idade);
+            if (cliente.Prioritario)
             {
-                var cliente = new Cliente();
-                cliente.Nome = nome;
-                cliente.Idade = idade;
-                cliente.Prioritario = true;
                 banco.FilaPrioritaria = filaPrioritaria.Enfileirar(cliente);
             }
             else
             {
-                var cliente = new Cliente();
-                cliente.Nome = nome;
-                cliente.Idade = idade;
-
                 banco.FilaNormal = filaNormal.Enfileirar(cliente);
             }
             break;
         case 2:
-            banco.AtenderCliente();
-            Console.WriteLine("\nPrecione enter para sair... ");
+            cliente = banco.AtenderCliente();
+
+            if (cliente is null)
+                Console.WriteLine("Nenhum cliente na fila");
+            else
+                Console.WriteLine(cliente);
+
+            Console.WriteLine("\nPrecione enter para continuar... ");
             Console.ReadKey();
             break;
         case 3:
@@ -73,7 +70,7 @@ do
                 Console.ResetColor();
             }
 
-            Console.WriteLine("\nPrecione enter para sair... ");
+            Console.WriteLine("\nPrecione enter para continuar... ");
             Console.ReadKey();
             break;
 
