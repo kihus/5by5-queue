@@ -1,0 +1,4 @@
+Criar uma classe Cliente com:
+Nome (string)
+Idade (int)
+ÉPrioritário (bool)
